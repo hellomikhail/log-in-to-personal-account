@@ -1,3 +1,4 @@
+import random
 import os
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
@@ -5,6 +6,17 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+code = 923
+
+def random_phone():
+    phone_number = list(range(1, 10, 1))
+    random.shuffle(phone_number)
+    seven_numbers = phone_number[0:7]
+    seven_numbers_str = ''.join(str(x) for x in seven_numbers)
+    return seven_numbers_str
+
+phone_number = random_phone()
 
 options = Options()
 options.binary_location = r'PATH\firefox.exe' # path to firefox.exe file
@@ -23,6 +35,6 @@ WebDriverWait(driver, 10).until(
     )
 )
 phone_number = driver.find_element(By.CSS_SELECTOR, "input[placeholder='+7 ___ ___-__-__']")
-phone_number.send_keys("9241111111")
+phone_number.send_keys(f'{code}{phone_number}')
 getcode_button = driver.find_element(By.XPATH, "//div[@class='mfui-button__inner']")
 getcode_button.click()
