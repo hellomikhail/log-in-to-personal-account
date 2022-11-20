@@ -23,6 +23,7 @@ options.binary_location = r'PATH\firefox.exe' # path to firefox.exe file
 
 s = Service('PATH\geckodriver.exe') # path to geckodriver.exe file
 driver = webdriver.Firefox(service=s, options=options)
+driver.maximize_window()
 driver.get('https://moscow.megafon.ru/')
 
 personal_account = driver.find_element(By.XPATH, "//div[@class='ch-account-controller ch-header__trigger ch-header__trigger_type_lk']//span[@class='ch-trigger__title ch-trigger__title_view_lk'][contains(text(),'Личный кабинет')]")
@@ -38,3 +39,4 @@ phone_number = driver.find_element(By.CSS_SELECTOR, "input[placeholder='+7 ___ _
 phone_number.send_keys(f'{code}{phone_number}')
 getcode_button = driver.find_element(By.XPATH, "//div[@class='mfui-button__inner']")
 getcode_button.click()
+driver.quit()
